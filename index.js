@@ -91,8 +91,10 @@ async function returnMangaName() {
     let cheerioObj = await cheerioObject(url);
     let mangaName = cheerioObj("h1.header").text().trim();
     let splitName = mangaName.split("/").at(0).trimEnd();
+    let replaceSymbols = /[`~!@#$%^&*()|+=?;:'<>{}\[\]\\]/gi
+    let textReplace = splitName.replace(replaceSymbols, '');
     console.log(`-- Манга: ${mangaName};`); // Название манги.
-    return replaceAll(splitName, " ", "_");
+    return replaceAll(textReplace, " ", "_");
 }
 
 // function for check tmp files on index and more.
